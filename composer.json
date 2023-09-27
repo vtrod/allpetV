@@ -1,0 +1,8 @@
+{
+  "name": "allpet/allpetfm-master",
+  "autoload": {
+    "psr-4": {
+      "tests\\": "tests/"
+    }
+  }
+}
