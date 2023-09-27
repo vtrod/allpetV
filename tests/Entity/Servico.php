@@ -43,24 +43,60 @@ class Servico
      */
     public $modatend;
 
+
+    /**
+     * AS DUAS FUNÇOES ABAIXO NAO ESTÃO CORRETAS
+     */
+
+   // private function formarObjeto($dados)
+   // {
+   //     return new Servico(
+   //         $dados['nomeservico'],
+   //         $dados['duracao'],
+   //         $dados['preco'],
+   //         $dados['fluxoag'],
+   //         $dados['periodorec'],
+   //         $dados['modatend']
+   //     );
+   // }
+
+
+
+  // public function salvarServico(Servico $servico)
+  // {
+  //     $sql = "INSERT INTO servico (nomeservico, duracao, preco, fluxoag, periodorec, modatend) VALUES (?,?,?,?,?,?)";
+  //     $statement = $this->pdo->prepare($sql);
+  //     $statement->bindValue(1, $servico->nomeservico);
+  //     $statement->bindValue(2, $servico->duracao);
+  //     $statement->bindValue(3, $servico->preco);
+  //     $statement->bindValue(4, $servico->fluxoag);
+  //     $statement->bindValue(5, $servico->periodorec);
+  //     $statement->bindValue(6, $servico->modatend);
+  //     $statement->execute();
+  // }
+
+
+
+
+
+
     /**
      * metodo responsavel por cadastrar novo serviço no banco
      * @return void
      */
     public function cadastrar(){
+//INSERIR SERVIÇO NO BANCO
+         $obDatabase = new Database('servico');
+         $this->id = $obDatabase->insert([
+                                'nomeservico'   => $this->nomeservico,
+                                'duracao'       => $this->duracao,
+                                'preco'         => $this->preco,
+                                'fluxoag'       => $this->fluxoag,
+                                'periodorec'    => $this->periodorec,
+                                'modatend'      => $this->modatend
 
-    //INSERIR SERVIÇO NO BANCO
-     $obDatabase = new Database('servico');
-     $this->id = $obDatabase->insert([
-                            'nomeservico'   => $this->nomeservico,
-                            'duracao'       => $this->duracao,
-                            'preco'         => $this->preco,
-                            'fluxoag'       => $this->fluxoag,
-                            'periodorec'    => $this->periodorec,
-                            'modatend'      => $this->modatend
-
-                        ]);
-        //RETORNAR SUCESSO
+                            ]);
+//RETORNAR SUCESSO
         return true;
     }
 

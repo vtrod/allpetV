@@ -1,24 +1,39 @@
 <?php
-
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(E_ALL);
 use tests\Entity\Servico;
 use tests\db\Database;
+
 require __DIR__.'\..\vendor\autoload.php';
+require 'db\Database.php';
 
 
-
-if(isset($_POST['nomeservico'],$_POST['duracao'],$_POST['preco'],$_POST['fluxoag'],$_POST['periodorec'],$_POST['modatend'])){
-    $obServico= new Servico;
-    $obServico-> nomeservico    = $_POST['nomeservico'];
-    $obServico-> duracao        = $_POST['duracao'];
-    $obServico-> preco          = $_POST['preco'];
-    $obServico-> fluxoag        = $_POST['fluxoag'];
-    $obServico-> periodorec     = $_POST['periodorec'];
-    $obServico-> modatend       = $_POST['modatend'];
+if(isset($_POST['botaocadastro'])) {
+    $obServico = new Servico;
+    $obServico-> nomeservico    =     $_POST['nomeservico'];
+    $obServico-> duracao        =     $_POST['duracao'];
+    $obServico-> preco          =     $_POST['preco'];
+    $obServico-> fluxoag        =     $_POST['fluxoag'];
+    $obServico-> periodorec     =     $_POST['periodorec'];
+    $obServico-> modatend       =     $_POST['modatend'];
     $obServico->cadastrar();
 
     header('location: addservico.php?status=success');
     exit;
 }
+    //$obServico= new Servico;
+    //$obServico-> nomeservico    =
+    //$obServico-> duracao        =
+    //$obServico-> preco          =
+    //$obServico-> fluxoag        =
+    //$obServico-> periodorec     =
+    //$obServico-> modatend       =
+    //$obServico->cadastrar();
+
+    //header('location: addservico.php?status=success');
+    //exit;
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -485,7 +500,7 @@ if(isset($_POST['nomeservico'],$_POST['duracao'],$_POST['preco'],$_POST['fluxoag
                                         <a href="" class="btn btn-primary btn-circle" title="Voltar">
                                             <i class="fas fa-fw fa-chevron-left"></i></a>
                                         <div class="ml-auto">
-                                            <button value="submit" class="btn btn-success btn-circle"
+                                            <button name="botaocadastro" value="submit" class="btn btn-success btn-circle"
                                                title="Adicionar">
                                                 <i class="fas fa-fw fa-chevron-down"></i></button>
                                             <a href="addservico.php" class="btn btn-danger btn-circle"
