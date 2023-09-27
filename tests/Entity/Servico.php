@@ -11,37 +11,37 @@ class Servico
      * Identificador do serviço
      * @var integer
      */
-    private $id;
+    public $id;
     /**
      * nome do serviço
      * @var string
      */
-    private $nomeservico;
+    public $nomeservico;
     /**
      * duração do servico
      * @var string
      */
-    private $duracao;
+    public $duracao;
     /**
      * preço do servico
      * @var float
      */
-    private $preco;
+    public $preco;
     /**
      * fluxo de agenda (select com as opções "Em andamento", "Pendente" e "Finalizado")
      * @var string
      */
-    private $fluxoag;
+    public $fluxoag;
     /**
      * periodização recomendada para realização do serviço
      * @var string
      */
-    private $periodorec;
+    public $periodorec;
     /**
      * descrição do serviço
      * @var string
      */
-    private $modatend;
+    public $modatend;
 
     /**
      * metodo responsavel por cadastrar novo serviço no banco
@@ -50,20 +50,47 @@ class Servico
     public function cadastrar(){
 
     //INSERIR SERVIÇO NO BANCO
-    $obDatabase = new Database('servico');
-    $this->id = $obDatabase->insert([
-                            'nomeservico'   =>$this->nomeservico,
-                            'duracao'       =>$this->duracao,
-                            'preco'         =>$this->preco,
-                            'fluxoag'       =>$this->fluxoag,
-                            'periodorec'    =>$this->periodorec,
-                            'modatend'      =>$this->modatend
+     $obDatabase = new Database('servico');
+     $this->id = $obDatabase->insert([
+                            'nomeservico'   => $this->nomeservico,
+                            'duracao'       => $this->duracao,
+                            'preco'         => $this->preco,
+                            'fluxoag'       => $this->fluxoag,
+                            'periodorec'    => $this->periodorec,
+                            'modatend'      => $this->modatend
 
-    ]);
-    //ATRIBUIR ID NA INSTANCIA DO SERVIÇO
+                        ]);
+        //RETORNAR SUCESSO
+        return true;
+    }
 
-    //RETORNAR SUCESSO
-    return true;
+
+
+        /**
+         * Método responsável por atualizar a vaga no banco
+         * @return boolean
+         */
+        public function atualizar(){
+            return (new Database('servico'))->update('id = '.$this->id,[
+                'nomeservico'   => $this->nomeservico,
+                'duracao'       => $this->duracao,
+                'preco'         => $this->preco,
+                'fluxoag'       => $this->fluxoag,
+                'periodorec'    => $this->periodorec,
+                'modatend'      => $this->modatend
+            ]);
+        }
+
+
+
+
+
+    /**
+     * Método responsável por excluir a vaga do banco
+     * @return boolean
+     */
+    public function excluir(){
+        return (new Database('servico'))->delete('id = '.$this->id);
     }
 
     /**
@@ -76,5 +103,15 @@ class Servico
         return (new Database('servico'))->select($where,$order,$limit)
                                              ->fetchAll(PDO::FETCH_CLASS,self::class);
     }
+
+    /**
+     * @param integer $id
+     * @return servicos
+     */
+    public static function getServicos($id){
+        return (new Database('servico'))->select('id = '.$id)
+            ->fetchObject(self::class);
+    }
+
 
 }

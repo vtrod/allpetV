@@ -1,10 +1,13 @@
 <?php
 
 use tests\Entity\Servico;
-
+use tests\db\Database;
 require __DIR__.'\..\vendor\autoload.php';
-if(ISSET($_POST['nomeservico'], $_POST['duracao'], $_POST['preco'], $_POST['fluxoag'], $_POST['periodorec'], $_POST['modatend'])){
-    $obServico = new Servico();
+
+
+
+if(isset($_POST['nomeservico'],$_POST['duracao'],$_POST['preco'],$_POST['fluxoag'],$_POST['periodorec'],$_POST['modatend'])){
+    $obServico= new Servico;
     $obServico-> nomeservico    = $_POST['nomeservico'];
     $obServico-> duracao        = $_POST['duracao'];
     $obServico-> preco          = $_POST['preco'];
@@ -16,9 +19,6 @@ if(ISSET($_POST['nomeservico'], $_POST['duracao'], $_POST['preco'], $_POST['flux
     header('location: addservico.php?status=success');
     exit;
 }
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -426,12 +426,13 @@ if(ISSET($_POST['nomeservico'], $_POST['duracao'], $_POST['preco'], $_POST['flux
                                 <!--Formulário para preenchimento do cadastro do serviço-->
 
                                 <!-- Serviços tab content -->
-                                <form method="post">
+
                                 <div class="container mt-5">
                                     <div class="row">
                                         <div class="col mb-3">
-                                            <label for="nomeserviço" class="form-label"><B>Nome do
-                                                    Serviço</B></label>
+                                            <form method="post" action="conservico.php">
+                                            <label for="nomeserviço" class="form-label"><b>Nome do
+                                                    Serviço</b></label>
                                             <input type="text" class="form-control" id="nomeservico" name="nome"
                                                 placeholder="Digite o nome do Serviço">
                                         </div>
@@ -451,9 +452,9 @@ if(ISSET($_POST['nomeservico'], $_POST['duracao'], $_POST['preco'], $_POST['flux
                                             <label for="fluxoag" class="form-label"><B>Fluxo Agenda</B></label>
                                             <select class='form-control' name='fluxoag' id="fluxoag">
                                                 <option value='0'>Selecione...</option>
-                                                <option value='andamento'>Em Andamento</option>
-                                                <option value='pendente'>Pendente</option>
-                                                <option value='finalizado'>Finalizado</option>
+                                                <option value="emAndamento">Em Andamento</option>
+                                                <option value="pendente">Pendente</option>
+                                                <option value="finalizado">Finalizado</option>
                                             </select>
 
                                         </div>
@@ -472,6 +473,7 @@ if(ISSET($_POST['nomeservico'], $_POST['duracao'], $_POST['preco'], $_POST['flux
                                                         de Atendimento</b></label>
                                                 <textarea class="form-control" id="modatend" rows="5"
                                                     placeholder="Descreva aqui como funciona o serviço"></textarea>
+
                                             </div>
                                         </div>
                                     </div>
@@ -486,7 +488,7 @@ if(ISSET($_POST['nomeservico'], $_POST['duracao'], $_POST['preco'], $_POST['flux
                                             <button value="submit" class="btn btn-success btn-circle"
                                                title="Adicionar">
                                                 <i class="fas fa-fw fa-chevron-down"></i></button>
-                                            <a href="" class="btn btn-danger btn-circle"
+                                            <a href="addservico.php" class="btn btn-danger btn-circle"
                                                title="Excluir">
                                                 <i class="fas fa-fw fa-xmark"></i></a>
                                         </div>

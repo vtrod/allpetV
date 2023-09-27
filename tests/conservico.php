@@ -6,23 +6,25 @@ require __DIR__.'\..\vendor\autoload.php';
 $servico = Servico::getServico();
 
 $resultados = '';
-foreach($servicos as $servico){
+foreach($servico as $servicos){
     $resultados .= '<tr>
-                        <td>'.$servico->id.'</td>
-                        <td>'.$servico->nomeservico.'</td>
-                        <td>'.servico->duracao.'</td>
-                        <td>'.$servico->preco.'</td>
-                        <td>'.$servico->fluxoag.'</td>
-                        <td>'.$servico->periodorec.'</td>
-                        <td>'.$servico->modatend.'</td>
-                        <td>
-                        <a href="editarservico.php?id='.$servico->id.'"><button type="button class= btn btn-primary">Editar</button>
+                        <td>'.$servicos->id.'</td>
+                        <td>'.$servicos->nomeservico.'</td>
+                        <td>'.$servicos->duracao.'</td>
+                        <td>'.$servicos->preco.'</td>
+                        <td>'.$servicos->fluxoag.'</td>
+                        <td>'.$servicos->periodorec.'</td>
+                        <td>'.$servicos->modatend.'</td>
+                        <td style="width: 180px">
+                        <a href="editarservico.php?id='.$servicos->id.'"><button type="button" class= "btn btn-primary btn-sm-2">Editar</button>
                         </a>
-                        <a href="excluirservico.php?id='.$servico->id.'"><button type="button class= btn btn-danger">Excluir</button>
+                        <a href="excluirservico.php?id='.$servicos->id.'"><button type="button" class= "btn btn-danger btn-sm-2">Excluir</button>
                         </a>
                         </td>
                     </tr>';
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -444,7 +446,7 @@ foreach($servicos as $servico){
                               <div class="col-auto">
                                 <form class="form-inline">
                                   <input type="text" class="form-control" placeholder="Pesquisar">
-                                  <button class="btn btn-primary" type="button">
+                                  <button class="btn btn-primary m-2" type="button">
                                       <i class="fas fa-search fa-sm"></i>
                                   </button>
                                 <!-- Botão CADASTRAR na tela de consulta-->
@@ -454,7 +456,7 @@ foreach($servicos as $servico){
                                  <!-- Fim Botão CADASTRAR na tela de consulta-->
                                 </form>
                               </div>
-                                
+
                                 <!-- Modal -->
                                 <div class="container-fluid" id="card">
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -469,84 +471,84 @@ foreach($servicos as $servico){
                                             
                                           </ul>
                                           </div>
-                                          
+
                                           <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="servico" role="tabpanel" aria-labelledby="servico-tab">
                                               <!-- servico tab content -->
                                               <div class="container mt-5 mb-5">
                                                 <!--Formulário para preenchimento do cadastro do serviço-->
-  
+
                    <!--NOME-->
+    <form method="post">
+          <div class="container mt-5 text-left">
+            <div class="row align-items-start">
+             <div class="col">
+              <div class="mb-3">
+               <label for="exampleFormControlInput1" class="form-label">*Nome:</label>
+               <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite o Nome do Serviço">
+              </div>
+             </div>
+             <div class="col">
+              <div class="mb-3">
+               <label for="exampleFormControlInput1" class="form-label">*Duração Padrão:</label>
+               <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a Duração do Serviço">
+              </div>
+             </div>
+            </div>
+           </div>
 
-  <div class="container mt-5 text-left">
-    <div class="row align-items-start">
-     <div class="col">
-      <div class="mb-3">
-       <label for="exampleFormControlInput1" class="form-label">*Nome:</label>
-       <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite o Nome do Serviço">
-      </div>
-     </div>
-     <div class="col">
-      <div class="mb-3">
-       <label for="exampleFormControlInput1" class="form-label">*Duração Padrão:</label>
-       <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Digite a Duração do Serviço">
-      </div>
-     </div>
-    </div>
-   </div>
+           <!-- -->
+           <div class="container text-left">
+            <div class="row align-items-start">
+             <div class="col">
+              <div class="mb-3">
+               <label for="exampleFormControlInput1" class="form-label">Fluxo Agenda:</label>
+               <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Fluxo Agenda">
+              </div>
+             </div>
+             <div class="col">
+              <div class="mb-3">
+               <label for="exampleFormControlInput1" class="form-label">Frequência Recomendada:</label>
+               <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Frequência Recomendada">
+              </div>
+             </div>
+            </div>
+           </div>
 
-   <!-- -->
-   <div class="container text-left">
-    <div class="row align-items-start">
-     <div class="col">
-      <div class="mb-3">
-       <label for="exampleFormControlInput1" class="form-label">Fluxo Agenda:</label>
-       <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Fluxo Agenda">
-      </div>
-     </div>
-     <div class="col">
-      <div class="mb-3">
-       <label for="exampleFormControlInput1" class="form-label">Frequência Recomendada:</label>
-       <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Frequência Recomendada">
-      </div>
-     </div>
-    </div>
-   </div>
-
-   <div class="container mb-5 text-left">
- <div class="row align-items-start">
-   <div class="col">
-     <div class="mb-3">
-    <label for="exampleFormControlTextarea1" class="form-label">Modelo de Atendimento:</label>
-    <textarea class="form-control" id="descreverservico" rows="5" placeholder="Descreva aqui como funciona o serviço"></textarea>
-   </div>
-   </div>
- </div>
- </div>
- 
+           <div class="container mb-5 text-left">
+         <div class="row align-items-start">
+           <div class="col">
+             <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Modelo de Atendimento:</label>
+            <textarea class="form-control" id="descreverservico" rows="5" placeholder="Descreva aqui como funciona o serviço"></textarea>
+           </div>
+           </div>
+         </div>
+         </div>
+    </form>
  <!--Esse esquema abaixo são os botões salvar e cancelar em relação ao Serviço-->
 
    <!-- End of Service-->
-                                                  
+
                                             </div>
                                             <hr>
                               <div class="container mt-4 mb-5">
                                 <div class="d-flex justify-content-between">
-                                
+
                                     <button type="button" class="btn btn-primary btn-circle"><i class="fas fa-fw fa-chevron-left"></i></button>
                                     <div class="ml-auto">
-                                    <a href="conservico2.html" class="btn btn-success btn-circle"><i class="fas fa-fw fa-chevron-down"></i></a>
-                                    <a href="conservico.html" class="btn btn-danger btn-circle"><i class="fas fa-fw fa-xmark"></i></a>
-                                    </div> 
-                                    
-                                  </div> 
+                                    <a href="conservico2.php" class="btn btn-success btn-circle"><i class="fas fa-fw fa-chevron-down"></i></a>
+                                    <a href="conservico.php" class="btn btn-danger btn-circle"><i class="fas fa-fw fa-xmark"></i></a>
+                                    </div>
+
+                                  </div>
                             </div>
                                             </div>
-                                            
-                                          
+
+
                                             </div>
                                         <!----------------->
-                                      
+
                                     </div>
                                   </div>
                                 </div>
@@ -561,10 +563,10 @@ foreach($servicos as $servico){
                                       <th>ID</th>
                                       <th>Nome do serviço</th>
                                       <th>Duração</th>
-                                      <th>Fluxo de Agenda</th>
-                                      <th>Fr. Recomendada</th>
-                                      <th>Descrição</th>
                                       <th>Preço</th>
+                                      <th>FLuxo de agenda</th>
+                                      <th>Fr. recomendada</th>
+                                      <th>Descrição</th>
                                       <th>Ação</th>
                                   </tr>
                                   </thead>

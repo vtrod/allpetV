@@ -60,10 +60,10 @@ public function __construct($table = null){
     /**
      * metodo responsavel por criar uma conexão com o bando de dados, utilizando uma instancia de PDO
      */
-    public function setConnection(){
+    private function setConnection(){
         try{
-        $this->connection = new PDO('mysql:host='.self::HOST.';dbname=.'.self::NAME,self::USER, self::PASS);
-        $this->connection->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            $this->connection = new PDO('mysql:host='.self::HOST.';dbname='.self::NAME,self::USER,self::PASS);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         }catch(PDOException $e){
             die('ERROR: '.$e->getMessage());
         }
@@ -94,14 +94,15 @@ public function __construct($table = null){
     public function insert($values){
         //DADOS DA QUERY
         $fields = array_keys($values);
-        $binds = array_pad([],count($fields), '?');
+        $binds  = array_pad([],count($fields),'?');
 
         //MONTA A QUERY
-        $query = 'INSERT INTO'.$this->table.'  ('.implode(',',$fields).') VALUES ('.implode(',',$binds).')';
+        $query = 'INSERT INTO '.$this->table.' ('.implode(',',$fields).') VALUES ('.implode(',',$binds).')';
 
         //EXECUTA O INSERT
-        $this->execute($query, array_values($values));
+        $this->execute($query,array_values($values));
 
+        //RETORNA O ID INSERIDO
         return $this->connection->lastInsertId();
     }
 
@@ -114,11 +115,11 @@ public function __construct($table = null){
          */
     public function select($where = null, $order = null, $limit = null, $fields = '*'){
         //DADOS DA QUERY
-        $where = strlen($where) ? 'WHERE '.where : '';
-        $where = strlen($order) ? 'ORDER BY '.order : '';
-        $where = strlen($limit) ? 'LIMIT '.limit : '';
+        $where = !empty($where) ? 'WHERE '.where : '';
+        $order = !empty($order) ? 'ORDER BY '.order : '';
+        $limit = !empty($limit) ? 'LIMIT '.limit : '';
         //MONTA A QUERY
-        $query = 'SELECT '.$fields.' FROM'.$this->table.' '.$where.' '.$limit;
+        $query = 'SELECT '.$fields.' FROM '.$this->table.' '.$where.' '.$limit;
         //EXECUTA A QUERY
         return $this->execute($query);
 
