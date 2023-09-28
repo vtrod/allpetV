@@ -103,7 +103,7 @@ class Servico
 
 
         /**
-         * Método responsável por atualizar a vaga no banco
+         * Método responsável por atualizar o servico no banco
          * @return boolean
          */
         public function atualizar(){
@@ -122,7 +122,7 @@ class Servico
 
 
     /**
-     * Método responsável por excluir a vaga do banco
+     * Método responsável por excluir o serviço do banco
      * @return boolean
      */
     public function excluir(){
@@ -146,7 +146,7 @@ class Servico
      */
     public static function getServicos($id){
         return (new Database('servico'))->select('id = '.$id)
-            ->fetchObject(self::class);
+                                             ->fetchObject(self::class);
     }
 
 
