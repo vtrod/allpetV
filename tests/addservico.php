@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
-error_reporting(E_ALL);
 use tests\Entity\Servico;
 use tests\db\Database;
 
@@ -22,17 +19,7 @@ if(isset($_POST['botaocadastro'])) {
     header('location: addservico.php?status=success');
     exit;
 }
-    //$obServico= new Servico;
-    //$obServico-> nomeservico    =
-    //$obServico-> duracao        =
-    //$obServico-> preco          =
-    //$obServico-> fluxoag        =
-    //$obServico-> periodorec     =
-    //$obServico-> modatend       =
-    //$obServico->cadastrar();
 
-    //header('location: addservico.php?status=success');
-    //exit;
 
 ?>
 <!DOCTYPE html>
@@ -445,10 +432,10 @@ if(isset($_POST['botaocadastro'])) {
                                 <div class="container mt-5">
                                     <div class="row">
                                         <div class="col mb-3">
-                                            <form method="post" action="conservico.php">
-                                            <label for="nomeserviço" class="form-label"><b>Nome do
+                                            <form method="post" action="addservico.php">
+                                            <label for="nomeservico" class="form-label"><b>Nome do
                                                     Serviço</b></label>
-                                            <input type="text" class="form-control" id="nomeservico" name="nome"
+                                            <input type="text" class="form-control" id="nomeservico" name="nomeservico"
                                                 placeholder="Digite o nome do Serviço">
                                         </div>
                                         <div class="col mb-3">
@@ -486,7 +473,7 @@ if(isset($_POST['botaocadastro'])) {
                                             <div class="mb-3">
                                                 <label for="modatend" class="form-label"><b>Modelo
                                                         de Atendimento</b></label>
-                                                <textarea class="form-control" id="modatend" rows="5"
+                                                <textarea name="modatend" class="form-control" id="modatend" rows="5"
                                                     placeholder="Descreva aqui como funciona o serviço"></textarea>
 
                                             </div>

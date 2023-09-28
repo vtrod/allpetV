@@ -5,24 +5,7 @@ require __DIR__.'\..\vendor\autoload.php';
 
 $servico = Servico::getServico();
 
-$resultados = '';
-foreach($servico as $servicos){
-    $resultados .= '<tr>
-                        <td>'.$servicos->id.'</td>
-                        <td>'.$servicos->nomeservico.'</td>
-                        <td>'.$servicos->duracao.'</td>
-                        <td>'.$servicos->preco.'</td>
-                        <td>'.$servicos->fluxoag.'</td>
-                        <td>'.$servicos->periodorec.'</td>
-                        <td>'.$servicos->modatend.'</td>
-                        <td style="width: 180px">
-                        <a href="editarservico.php?id='.$servicos->id.'"><button type="button" class= "btn btn-primary btn-sm-2">Editar</button>
-                        </a>
-                        <a href="excluirservico.php?id='.$servicos->id.'"><button type="button" class= "btn btn-danger btn-sm-2">Excluir</button>
-                        </a>
-                        </td>
-                    </tr>';
-}
+
 
 
 ?>
@@ -564,14 +547,30 @@ foreach($servico as $servicos){
                                       <th>Nome do serviço</th>
                                       <th>Duração</th>
                                       <th>Preço</th>
-                                      <th>FLuxo de agenda</th>
+                                      <th>Fluxo de agenda</th>
                                       <th>Fr. recomendada</th>
                                       <th>Descrição</th>
                                       <th>Ação</th>
                                   </tr>
                                   </thead>
                                       <tbody>
-                                            <?=$resultados?>
+                                      <?php foreach ($servico as $servicos):?>
+                                          <tr>
+                                              <td><?=   $servicos->id             ?></td>
+                                              <td><?=   $servicos->nomeservico    ?></td>
+                                              <td><?=   $servicos->duracao        ?></td>
+                                              <td><?=   $servicos->preco          ?></td>
+                                              <td><?=   $servicos->fluxoag        ?></td>
+                                              <td><?=   $servicos->periodorec     ?></td>
+                                              <td><?=   $servicos->modatend       ?></td>
+                                              <td style="width: 180px">
+                                                  <a href="editarservico.php?id=<?= $servicos->id ?>"><button type="button" name="editar" class= "btn btn-primary btn-sm-2">Editar</button>
+                                                  </a>
+                                                  <a href="excluirservico.php?id=<?= $servicos->id ?>"><button type="button" name="excluir" class= "btn btn-danger btn-sm-2">Excluir</button>
+                                                  </a>
+                                              </td>
+                                          </tr>
+                                      <?php endforeach; ?>
                                       </tbody>
                               </table>
                           </div>
@@ -579,9 +578,9 @@ foreach($servico as $servicos){
                           </div>
                       </div>
                       </div>
-                            
-                            
-                    
+
+
+
                     
                 
                     
